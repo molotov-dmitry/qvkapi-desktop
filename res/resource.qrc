@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>config-user.svg</file>
+        <file>configure.svg</file>
+        <file>list-add.svg</file>
+        <file>list-remove.svg</file>
+        <file>user-logout.svg</file>
+        <file>user-switch.svg</file>
+        <file>icon.svg</file>
+        <file>icon-auth.svg</file>
+        <file>icon-settings.svg</file>
+        <file>refresh.svg</file>
+        <file>user.svg</file>
+        <file>go-next.svg</file>
+        <file>process-working.png</file>
+        <file>process-working.svg</file>
+        <file>user-away.svg</file>
+        <file>user-busy.svg</file>
+        <file>user-offline.svg</file>
+        <file>user-available.svg</file>
+        <file>home.svg</file>
+        <file>cat_albums.png</file>
+        <file>cat_audios.png</file>
+        <file>cat_friends.png</file>
+        <file>cat_photos.png</file>
+        <file>cat_videos.png</file>
+        <file>dialog-error.png</file>
+        <file>open-link.svg</file>
+        <file>cache.svg</file>
+    </qresource>
+    <qresource prefix="/anim">
+        <file>process-working.svg</file>
+        <file>process-working.png</file>
+    </qresource>
+</RCC>
