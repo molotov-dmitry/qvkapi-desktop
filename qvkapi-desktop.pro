@@ -25,6 +25,7 @@ SOURCES += \
     libqvkapi/src/qvkauthview.cpp \
     libqvkapi/src/qvkrequest.cpp \
     libqvkapi/src/qvkrequestalbums.cpp \
+    libqvkapi/src/qvkrequestfriends.cpp \
     libqvkapi/src/qvkrequestphotos.cpp \
     libqvkapi/src/qvkrequestusers.cpp \
     data/accountinfo.cpp \
@@ -51,6 +52,7 @@ HEADERS  += \
     libqvkapi/include/qvkinfophoto.h \
     libqvkapi/include/qvkrequest.h \
     libqvkapi/include/qvkrequestalbums.h \
+    libqvkapi/include/qvkrequestfriends.h \
     libqvkapi/include/qvkrequestphotos.h \
     libqvkapi/include/qvkrequestusers.h \
     libqvkapi/include/qvkuserinfo.h \
