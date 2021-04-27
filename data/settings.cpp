@@ -76,7 +76,7 @@ bool Settings::migrateDb(QSqlDatabase &db, int versionFrom, int versionTo)
 
 bool Settings::connectToDb(const QString &dbName)
 {
-    QString path = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + "vk-qt5";
+    QString path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/vk-qt5";
 
     QDir appConfigDir(path);
     appConfigDir.mkpath(path);
