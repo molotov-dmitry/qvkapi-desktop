@@ -34,6 +34,7 @@ public:
         PAGE_ALBUM_LIST,
         PAGE_USER_PHOTOS,
         PAGE_ALBUM,
+        PAGE_FRIENDS
     };
 
     /*!

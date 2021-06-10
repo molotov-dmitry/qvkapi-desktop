@@ -38,6 +38,7 @@ SOURCES += \
     main.cpp\
     mainwindow.cpp \
     pages/vkpagealbums.cpp \
+    pages/vkpagefriends.cpp \
     pages/vkpagephotos.cpp \
     pages/vkpageuser.cpp \
     pages/vkpagewidget.cpp \
@@ -66,6 +67,7 @@ HEADERS  += \
     dialogs/dialogsettings.h \
     mainwindow.h \
     pages/vkpagealbums.h \
+    pages/vkpagefriends.h \
     pages/vkpagephotos.h \
     pages/vkpageuser.h \
     pages/vkpagewidget.h \
@@ -78,6 +80,7 @@ FORMS    += \
     dialogs/dialogsettings.ui \
     mainwindow.ui \
     pages/vkpagealbums.ui \
+    pages/vkpagefriends.ui \
     pages/vkpagephotos.ui \
     pages/vkpageuser.ui
 

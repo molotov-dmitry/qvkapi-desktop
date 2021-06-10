@@ -357,3 +357,8 @@ void VkPageUser::on_buttonPhotos_clicked()
 {
     emit linkOpened("photos" + mPageId);
 }
+
+void VkPageUser::on_buttonFriends_clicked()
+{
+    emit linkOpened("friends" + mPageId);
+}
