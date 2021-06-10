@@ -10,34 +10,19 @@
 #include "qvkalbuminfo.h"
 #include "qvkuserinfo.h"
 
-class VkAlbumThumb : public QObject
+#include "vkthumbnail.h"
+
+class VkAlbumThumb : public VkThumbnail
 {
     Q_OBJECT
 
 public:
-    explicit VkAlbumThumb(QAbstractButton* button, const QString &thumbUrl, QObject *parent);
+    explicit VkAlbumThumb(QAbstractButton* item, const QString &thumbUrl, QObject *parent);
 
-    QAbstractButton *button() const;
+    QAbstractButton* button() const;
 
 private:
-
-    QAbstractButton *mButton;
-
-    QTimer mLoadingAnimationTimer;
-
-    QList<QPixmap> mLoadingAnimationImageList;
-    unsigned int mLoadingAnimationCount;
-
-    unsigned int mLoadingAnimationIndex;
-
-    QIcon mErrorIcon;
-
-private slots:
-
-    void updateLoadingAnimation();
-
-    void imageLoaded(const QImage &image);
-    void imageLoadFailed(const QString &errorText);
+    virtual void setIcon(const QIcon &icon) override;
 
 };
 
