@@ -1,4 +1,4 @@
 [submodule "libqvkapi"]
 	path = libqvkapi
 	url = https://github.com/molotov-dmitry/libqvkapi.git
-	branch = vkapi_friends
+	branch = master
