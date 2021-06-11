@@ -1,5 +1,5 @@
-#ifndef VKPAGEALBUMS_H
-#define VKPAGEALBUMS_H
+#ifndef VKPAGEFRIENDS_H
+#define VKPAGEFRIENDS_H
 
 #include <QAbstractButton>
 #include <QTimer>
@@ -12,12 +12,12 @@
 
 #include "vkthumbnail.h"
 
-class VkAlbumThumb : public VkThumbnail
+class VkFriendThumb : public VkThumbnail
 {
     Q_OBJECT
 
 public:
-    explicit VkAlbumThumb(QAbstractButton* item, const QString &thumbUrl, QObject *parent);
+    explicit VkFriendThumb(QAbstractButton* item, const QString &thumbUrl, QObject *parent);
 
     QAbstractButton* button() const;
 
@@ -27,16 +27,16 @@ private:
 };
 
 namespace Ui {
-class VkPageAlbums;
+class VkPageFriends;
 }
 
-class VkPageAlbums : public VkPageWidget
+class VkPageFriends : public VkPageWidget
 {
     Q_OBJECT
 
 public:
-    explicit VkPageAlbums(QWidget *parent = nullptr);
-    ~VkPageAlbums() override;
+    explicit VkPageFriends(QWidget *parent = nullptr);
+    ~VkPageFriends() override;
 
     void setUserId(unsigned int userId);
     void setUserInfo(const VkUserInfoBasic &userInfo);
@@ -47,18 +47,18 @@ private slots:
 
     void updateUserInfo();
 
-    void albumListReceived(QList<VkAlbumInfo> albumList);
+    void friendListReceived(QList<VkUserInfoFull> friendList);
     void userInfoReceived(QList<VkUserInfoBasic> userInfoList);
 
-    void albumClick();
+    void friendClick();
 
 private:
-    Ui::VkPageAlbums *ui;
+    Ui::VkPageFriends *ui;
 
     unsigned int mUserId;
 
-    QList<VkAlbumThumb*> mAlbumThumbs;
-    QMap<QObject*, VkAlbumInfo> mAlbumIds;
+    QList<VkFriendThumb*> mFriendThumbs;
+    QMap<QObject*, VkUserInfoFull> mFriendIds;
 
 public slots:
 
@@ -69,4 +69,4 @@ signals:
     void pageLoaded(const QString &pageId, const VkUserInfoBasic &userInfo);
 };
 
-#endif // VKPAGEALBUMS_H
+#endif // VKPAGEFRIENDS_H

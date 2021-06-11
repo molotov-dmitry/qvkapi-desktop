@@ -217,6 +217,14 @@ Metadata::PageType Metadata::getPageType(const QString &pageUri)
         }
     }
 
+    if (uri.startsWith("friends"))
+    {
+        uri.mid(7).toUInt(&ok);
+
+        if (ok)
+            return PAGE_FRIENDS;
+    }
+
     return PAGE_UNKNOWN;
 }
 

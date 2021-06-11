@@ -143,144 +143,18 @@ void VkPageAlbums::updatePage()
 //// Album thumb loader ========================================================
 //// ===========================================================================
 
-VkAlbumThumb::VkAlbumThumb(QAbstractButton *button, const QString &thumbUrl, QObject *parent) : QObject(parent)
+VkAlbumThumb::VkAlbumThumb(QAbstractButton* item, const QString& thumbUrl, QObject* parent) :
+    VkThumbnail(item, 128, parent)
 {
-    mButton = button;
-
-    //// Animation -------------------------------------------------------------
-
-    //    mLoadingAnimationTimer.setInterval(50);
-    connect(&mLoadingAnimationTimer, SIGNAL(timeout()), this, SLOT(updateLoadingAnimation()));
-    mLoadingAnimationTimer.start(50);
-
-    QImage anim = QImage(":/anim/process-working.png");
-
-    int animCols = 8;
-    int animSize = anim.width() / animCols;
-    int animRows = anim.height() / animSize;
-
-    for (int y = 0; y < animRows; ++y)
-    {
-        for (int x = 0; x < animCols; ++x)
-        {
-            if (y == 0 && x == 0)
-                continue;
-
-            QPixmap pixmap(128, 128);
-            pixmap.fill(Qt::transparent);
-
-            QImage drawImage = anim.copy(x * animSize, y * animSize, animSize, animSize);
-            int offset = (128 - animSize) / 2;
-
-            QPainter p(&pixmap);
-
-            p.drawImage(offset, offset, drawImage);
-
-            p.end();
-
-            mLoadingAnimationImageList.append(pixmap);
-        }
-    }
-
-    mLoadingAnimationCount = animRows * animCols - 1;
-    mLoadingAnimationIndex = 0;
-
-    //// Error pixmap ==========================================================
-    {
-        QPixmap errorPixmap(128, 128);
-        errorPixmap.fill(Qt::transparent);
-
-        QImage errorImage = QImage(":/icons/dialog-error.png");
-
-        int offset = (128 - errorImage.width()) / 2;
-
-        QPainter p(&errorPixmap);
-
-        p.drawImage(offset, offset, errorImage);
-
-        p.end();
-
-        mErrorIcon = QIcon(errorPixmap);
-    }
-
-    //// Request image from cache ==============================================
-
-    ImageCache *cache = new ImageCache(this);
-
-    connect(cache, SIGNAL(imageLoaded(QImage)), this, SLOT(imageLoaded(QImage)));
-    connect(cache, SIGNAL(imageLoadFailed(QString)), this, SLOT(imageLoadFailed(QString)));
-
-    cache->loadImage(thumbUrl);
+    load(thumbUrl);
 }
 
-QAbstractButton *VkAlbumThumb::button() const
+QAbstractButton* VkAlbumThumb::button() const
 {
-    return mButton;
+    return (QAbstractButton*)mItem;
 }
 
-void VkAlbumThumb::updateLoadingAnimation()
+void VkAlbumThumb::setIcon(const QIcon& icon)
 {
-    if (!mLoadingAnimationImageList.isEmpty())
-    {
-        QPixmap pixmap = mLoadingAnimationImageList.at(mLoadingAnimationIndex);
-
-        mButton->setIcon(QIcon(pixmap));
-
-        mLoadingAnimationIndex = (mLoadingAnimationIndex + 1) % mLoadingAnimationCount;
-    }
-}
-
-void VkAlbumThumb::imageLoaded(const QImage &image)
-{
-    mLoadingAnimationTimer.stop();
-    mLoadingAnimationImageList.clear();
-    mLoadingAnimationCount = 0;
-
-    mErrorIcon = QIcon();
-
-    QPixmap pixmap(128, 128);
-    pixmap.fill(Qt::transparent);
-
-    QImage drawImage = image;
-
-    if (image.width() > image.height() && image.width() > 128)
-        drawImage = image.scaledToWidth(128);
-    else if (image.height() > image.width() && image.height() > 128)
-        drawImage = image.scaledToHeight(128);
-
-    QPainter p(&pixmap);
-    p.setRenderHint(QPainter::Antialiasing);
-
-    int xOffset = 0;
-    int yOffset = 0;
-
-    if (drawImage.width() < 128)
-        xOffset = (128 - drawImage.width()) / 2;
-
-    if (drawImage.height() < 128)
-        yOffset = (128 - drawImage.height()) / 2;
-
-    p.drawImage(xOffset, yOffset, drawImage);
-
-    p.end();
-
-    QIcon icon = QIcon(pixmap);
-
-    if (mButton)
-        mButton->setIcon(icon);
-
-}
-
-void VkAlbumThumb::imageLoadFailed(const QString &errorText)
-{
-    Q_UNUSED(errorText);
-
-    mLoadingAnimationTimer.stop();
-    mLoadingAnimationImageList.clear();
-    mLoadingAnimationCount = 0;
-
-    if (mButton)
-        mButton->setIcon(mErrorIcon);
-
-    mErrorIcon = QIcon();
+    ((QAbstractButton*)mItem)->setIcon(icon);
 }

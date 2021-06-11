@@ -25,6 +25,7 @@ SOURCES += \
     libqvkapi/src/qvkauthview.cpp \
     libqvkapi/src/qvkrequest.cpp \
     libqvkapi/src/qvkrequestalbums.cpp \
+    libqvkapi/src/qvkrequestfriends.cpp \
     libqvkapi/src/qvkrequestphotos.cpp \
     libqvkapi/src/qvkrequestusers.cpp \
     data/accountinfo.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
     main.cpp\
     mainwindow.cpp \
     pages/vkpagealbums.cpp \
+    pages/vkpagefriends.cpp \
     pages/vkpagephotos.cpp \
     pages/vkpageuser.cpp \
     pages/vkpagewidget.cpp \
@@ -51,6 +53,7 @@ HEADERS  += \
     libqvkapi/include/qvkinfophoto.h \
     libqvkapi/include/qvkrequest.h \
     libqvkapi/include/qvkrequestalbums.h \
+    libqvkapi/include/qvkrequestfriends.h \
     libqvkapi/include/qvkrequestphotos.h \
     libqvkapi/include/qvkrequestusers.h \
     libqvkapi/include/qvkuserinfo.h \
@@ -64,6 +67,7 @@ HEADERS  += \
     dialogs/dialogsettings.h \
     mainwindow.h \
     pages/vkpagealbums.h \
+    pages/vkpagefriends.h \
     pages/vkpagephotos.h \
     pages/vkpageuser.h \
     pages/vkpagewidget.h \
@@ -76,6 +80,7 @@ FORMS    += \
     dialogs/dialogsettings.ui \
     mainwindow.ui \
     pages/vkpagealbums.ui \
+    pages/vkpagefriends.ui \
     pages/vkpagephotos.ui \
     pages/vkpageuser.ui
 

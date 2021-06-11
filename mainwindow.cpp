@@ -17,6 +17,7 @@
 #include "vkpageuser.h"
 #include "vkpagealbums.h"
 #include "vkpagephotos.h"
+#include "vkpagefriends.h"
 
 #include "imagecache.h"
 
@@ -187,6 +188,38 @@ void MainWindow::openPhotosPage(unsigned long userId, long albumId)
     mCurrentPage = page;
 
     int newTabIndex = ui->tabWidget->addTab(page, QIcon::fromTheme("user-identity"), QString::number(userId) + " albums");
+
+    if (newTabIndex >= 0)
+    {
+        setIcon(ui->tabWidget, newTabIndex, "user.svg");
+        ui->tabWidget->setCurrentIndex(newTabIndex);
+    }
+}
+
+void MainWindow::openFriendsPage(unsigned long userId)
+{
+    for (int i = 0; i < mPages.count(); ++i)
+    {
+        VkPageWidget *page = mPages.at(i);
+
+        if (page->isThisPage("friends" + QString::number(userId)))
+        {
+            ui->tabWidget->setCurrentIndex(i);
+            return;
+        }
+    }
+
+    VkPageFriends *page = new VkPageFriends(nullptr);
+    page->setToken(mAccInfo.token());
+    page->setUserId(userId);
+
+    connect(page, SIGNAL(pageLoaded(QString,QString)), this, SLOT(updatePageName(QString,QString)));
+    connect(page, SIGNAL(linkOpened(QString)), this, SLOT(openPage(QString)));
+
+    mPages.append(page);
+    mCurrentPage = page;
+
+    int newTabIndex = ui->tabWidget->addTab(page, QIcon::fromTheme("user-identity"), QString::number(userId) + " friends");
 
     if (newTabIndex >= 0)
     {
@@ -408,6 +441,12 @@ void MainWindow::openPage(const QString &pageUri)
         long albumId = pageIds.at(1).toLongLong();
 
         openPhotosPage(userId, albumId);
+        break;
+    }
+
+    case Metadata::PAGE_FRIENDS:
+    {
+        openFriendsPage(pageUri.mid(7).toUInt());
         break;
     }
 
